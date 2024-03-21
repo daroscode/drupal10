@@ -1,0 +1,13 @@
+---
+name: Webform XLSX Export
+type: module
+description: "Exports Webform submissions in the Office Open XML format."
+package: Webform
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - webform:webform
+
+# Information added by Drupal.org packaging script on 2023-05-10
+version: '8.x-1.2'
+project: 'webform_xlsx_export'
+datestamp: 1683711080

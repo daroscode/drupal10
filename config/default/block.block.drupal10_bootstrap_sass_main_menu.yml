@@ -1,0 +1,27 @@
+uuid: 44d66f23-b100-4888-a6e2-52ea43f096a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - drupal10_bootstrap_sass
+_core:
+  default_config_hash: QGmHpVB72R0SuVL6Jmd92ZjkX97L3_-mu0mw_7pRMWI
+id: drupal10_bootstrap_sass_main_menu
+theme: drupal10_bootstrap_sass
+region: primary_menu
+weight: -6
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: true
+visibility: {  }

@@ -1,0 +1,68 @@
+name: drupal10
+recipe: drupal10
+config:
+  webroot: /web
+  php: '8.2'
+  via: apache
+  index: false
+  edge: false
+  cache: false
+  xdebug: false
+  composer_version: 2.7.2
+proxy:
+  phpmyadmin:
+    - phpmyadmin.drupal10.lndo.site
+  mailhog:
+    - mailhog.drupal10.lndo.site
+services:
+  appserver:
+    run_as_root:
+      # - bash EXAMPLE! RUN SOME SCRIPT
+  phpserver:
+    type: php
+    config: 
+      php: config/lando/php.ini
+  nodeserver:
+    type: node:16
+    ssl: true
+    globals:
+      npm-cli: latest
+      gulp-cli: latest
+    build:
+      - npm install && gulp install
+    command: npm start
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
+  mailhog:
+    # Use the latest mailhog version
+    type: mailhog
+    # List of services that we want to capture mail from
+    # You can run `lando info` to get a list of services that are available
+    # Mailhog expects that these services will be php services
+    hogfrom:
+      - appserver
+    # Optionally allow access to the smtp service at localhost:1026
+    # You will need to make sure port 1026 is open on your machine
+    #
+    # You can also set `portforward: true` to have Lando dynamically assign
+    # an open port. Unlike specifying an actual port setting this to true will give you
+    # a different port every time you restart your app
+    portforward: 1026
+events:
+  post-start:
+    #- bash /app/scripts/post-start.sh
+  post-db-import:
+    - appserver: bash /app/scripts/post-db-import.sh
+tooling:
+  drush:
+    service: appserver
+    env:
+      DRUSH_OPTIONS_URI: "https://drupal10.lndo.site"
+  npm:
+    service: nodeserver
+  gulp:
+    service: nodeserver
+  yarn:
+    service: nodeserver

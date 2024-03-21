@@ -1,0 +1,20 @@
+label: 'Novos membros'
+description: 'Mostrar uma lista das novas contas de usuários no site.'
+display:
+  default:
+    display_title: Padrão
+    display_options:
+      title: 'Novos membros'
+      exposed_form:
+        options:
+          submit_button: Aplicar
+          reset_button_label: Redefinir
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Ascendente
+          sort_desc_label: Decrescente
+  block_1:
+    display_title: 'Novos membros'
+    display_options:
+      display_description: 'Uma lista de novos usuários'
+      block_description: 'Novos membros'
+      block_category: Usuário

@@ -1,0 +1,104 @@
+settings:
+  default_form_open_message: 'Este formulário ainda não está aberto a submissões.'
+  default_form_close_message: 'Desculpe… Este formulário está fechado para novas submissões.'
+  default_form_exception_message: 'Não foi possível exibir este webform. Por favor entre em contato com o administrador do site.'
+  default_submit_button_label: Enviar
+  default_reset_button_label: Redefinir
+  default_delete_button_label: Apagar
+  default_form_confidential_message: 'Este formulário é confidencial. Você deve<a href="[site:login-url]/logout?destination=[current-page:url:relative]">Fazer log out</a> para poder enviar.'
+  default_form_access_denied_message: 'Por favor, autentique-se para acessar este formulário.'
+  default_form_required_label: 'Indica campo requerido'
+  default_wizard_prev_button_label: '< Anterior'
+  default_wizard_next_button_label: 'Próximo >'
+  default_wizard_start_label: Iniciar
+  default_wizard_confirmation_label: Concluído
+  default_wizard_toggle_show_label: 'Mostrar todos'
+  default_wizard_toggle_hide_label: 'Ocultar todos'
+  default_preview_next_button_label: Pré-visualizar
+  default_preview_prev_button_label: '< Anterior'
+  default_preview_label: Pré-visualizar
+  default_preview_title: '[webform:title]: Pré-visualização'
+  default_preview_message: 'Por favor, revise a sua submissão. Sua submissão não estará completa até você pressionar o botão "Enviar"!'
+  default_draft_button_label: 'Salvar rascunho'
+  default_draft_saved_message: 'Submissão salva. Você pode retornar a esse formulário posteriormente e ele irá restaurar os valores atuais.'
+  default_draft_loaded_message: 'Um formulário parcialmente completo foi encontrado. Por favor, complete as partes restantes.'
+  default_draft_pending_single_message: 'Você tem um rascunho pendente para este webform. <a href="#">Carregar seu rascunho</a>.'
+  default_draft_pending_multiple_message: 'Você tem rascunhos pendentes para este formulário. <a href="#">Veja seus rascunhos pendentes</a>.'
+  default_confirmation_message: 'Novas submissões foram adicionadas ao [webform:title].'
+  default_submission_label: '[webform_submission:submitted-to]: Submissão #[webform_submission:serial]'
+  default_submission_access_denied_message: 'Por favor, autentique-se para acessar esta submissão.'
+  default_submission_exception_message: 'Não foi possível processar esta submissão. Por favor, contate o administrador do site.'
+  default_submission_locked_message: 'Esta submissão pode ter sido travada.'
+  default_previous_submission_message: 'Você já submeteu este webform. <a href="#">Veja suas submissões anteriores</a>.'
+  default_previous_submissions_message: 'Você já submeteu este webform. <a href="#">Veja suas submissões anteriores</a>.'
+  default_autofill_message: 'Esta submissão foi preenchida automaticamente com sua submissão anterior.'
+  default_limit_total_message: 'Não são permitidas novas submissões.'
+  default_limit_user_message: 'Não são permitidas novas submissões.'
+  dialog_options:
+    narrow:
+      title: Estreito
+    normal:
+      title: Normal
+    wide:
+      title: Largo
+element:
+  empty_message: '{Empty}'
+  default_more_title: Mais
+  default_section_title_tag: h2
+file:
+  file_private_redirect_message: 'Por favor, autentique-se para acessar o arquivo carregado.'
+mail:
+  default_from_name: '[site:name]'
+  default_subject: 'Submissão de webform de: [webform_submission:source-title]'
+  default_body_text: |
+    Submetido em [webform_submission:created]
+    Submetido por: [webform_submission:user]
+
+    Valores submetidos são:
+    [webform_submission:values]
+  default_body_html: |
+    <p>Submetido em [webform_submission:created]</p>
+    <p>Submetido por: [webform_submission:user]</p>
+    <p>Valores submetidos são:</p>
+    [webform_submission:values]
+test:
+  types: |
+    checkbox:
+      - true
+    color:
+      - '#ffffcc'
+      - '#ffffcc'
+      - '#ccffff'
+    email:
+      - 'example@example.com'
+      - 'test@test.com'
+      - 'random@random.com'
+    language_select:
+      - en
+    machine_name:
+      - 'loremipsum'
+      - 'oratione'
+      - 'dixisset'
+    tel:
+      - '123-456-7890'
+      - '098-765-4321'
+    textarea:
+      - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Negat esse eam, inquit, propter se expetendam. Primum Theophrasti, Strato, physicum se voluit; Id mihi magnum videtur. Itaque mihi non satis videmini considerare quod iter sit naturae quaeque progressio. Quare hoc videndum est, possitne nobis hoc ratio philosophorum dare. Est enim tanti philosophi tamque nobilis audacter sua decreta defendere.'
+      - 'Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. Sed haec in pueris; Sed utrum hortandus es nobis, Luci, inquit, an etiam tua sponte propensus es? Sapiens autem semper beatus est et est aliquando in dolore; Immo videri fortasse. Paulum, cum regem Persem captum adduceret, eodem flumine invectio? Et ille ridens: Video, inquit, quid agas;'
+      - 'Quae cum dixisset, finem ille. Quamquam non negatis nos intellegere quid sit voluptas, sed quid ille dicat. Progredientibus autem aetatibus sensim tardeve potius quasi nosmet ipsos cognoscimus. Gloriosa ostentatio in constituendo summo bono. Qui-vere falsone, quaerere mittimus-dicitur oculis se privasse; Duarum enim vitarum nobis erunt instituta capienda. Comprehensum, quod cognitum non habet? Qui enim existimabit posse se miserum esse beatus non erit. Causa autem fuit huc veniendi ut quosdam hinc libros promerem. Nunc omni virtuti vitium contrario nomine opponitur.'
+    text_format:
+      - value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Negat esse eam, inquit, propter se expetendam. Primum Theophrasti, Strato, physicum se voluit; Id mihi magnum videtur. Itaque mihi non satis videmini considerare quod iter sit naturae quaeque progressio. Quare hoc videndum est, possitne nobis hoc ratio philosophorum dare. Est enim tanti philosophi tamque nobilis audacter sua decreta defendere.</p>'
+      - value: '<p>Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. Sed haec in pueris; Sed utrum hortandus es nobis, Luci, inquit, an etiam tua sponte propensus es? Sapiens autem semper beatus est et est aliquando in dolore; Immo videri fortasse. Paulum, cum regem Persem captum adduceret, eodem flumine invectio? Et ille ridens: Video, inquit, quid agas;</p>'
+      - value: '<p>Quae cum dixisset, finem ille. Quamquam non negatis nos intellegere quid sit voluptas, sed quid ille dicat. Progredientibus autem aetatibus sensim tardeve potius quasi nosmet ipsos cognoscimus. Gloriosa ostentatio in constituendo summo bono. Qui-vere falsone, quaerere mittimus-dicitur oculis se privasse; Duarum enim vitarum nobis erunt instituta capienda. Comprehensum, quod cognitum non habet? Qui enim existimabit posse se miserum esse beatus non erit. Causa autem fuit huc veniendi ut quosdam hinc libros promerem. Nunc omni virtuti vitium contrario nomine opponitur.</p>'
+    url:
+      - 'http://example.com'
+      - 'http://test.com'
+    webform_email_confirm:
+      - 'example@example.com'
+      - 'test@test.com'
+      - 'random@random.com'
+    webform_email_multiple:
+      - 'example@example.com, test@test.com, random@random.com'
+    webform_time:
+      - '09:00'
+      - '17:00'

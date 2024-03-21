@@ -1,0 +1,7 @@
+hreflang.admin_settings:
+  path: '/admin/config/search/hreflang'
+  defaults:
+    _form: '\Drupal\hreflang\Form\ModuleConfigurationForm'
+    _title: 'Hreflang tags'
+  requirements:
+    _permission: 'administer site configuration'

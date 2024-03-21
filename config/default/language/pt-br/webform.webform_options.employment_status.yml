@@ -1,0 +1,8 @@
+label: 'Situação de emprego'
+category: Demográfico
+options: |
+  'Tempo Integral': 'Tempo Integral'
+  'Tempo Parcial': 'Tempo Parcial'
+  'Militar': 'Militar'
+  Desempregado: Desempregado
+  Aposentado: Aposentado

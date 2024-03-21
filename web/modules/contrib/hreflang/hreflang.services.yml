@@ -1,0 +1,11 @@
+services:
+
+  hreflang.config_subscriber:
+    class: Drupal\hreflang\EventSubscriber\HreflangConfigSubscriber
+    arguments: ['@event_dispatcher', '@logger.channel.hreflang', '@messenger', '@?cache.dynamic_page_cache', '@?cache.page']
+    tags:
+      - { name: event_subscriber }
+
+  logger.channel.hreflang:
+    parent: logger.channel_base
+    arguments: ['hreflang']

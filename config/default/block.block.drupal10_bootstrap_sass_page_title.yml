@@ -1,0 +1,20 @@
+uuid: bf1b9767-cd4a-402d-914c-63d29e68e50e
+langcode: en
+status: true
+dependencies:
+  theme:
+    - drupal10_bootstrap_sass
+_core:
+  default_config_hash: WmMGlz7BXMOwsHU3Ay-0azxxutQaUR39w_PP_mDjzUU
+id: drupal10_bootstrap_sass_page_title
+theme: drupal10_bootstrap_sass
+region: content
+weight: -7
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

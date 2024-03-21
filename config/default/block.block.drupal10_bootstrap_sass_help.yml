@@ -1,0 +1,22 @@
+uuid: e7969e40-4519-49ed-ba26-cb27c2ebdc2e
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - drupal10_bootstrap_sass
+_core:
+  default_config_hash: mjlGH78cfBL3K0MsHhSLLJvZsfaPQyNsjv_rOrmCf_E
+id: drupal10_bootstrap_sass_help
+theme: drupal10_bootstrap_sass
+region: highlighted
+weight: -2
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

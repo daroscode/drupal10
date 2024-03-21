@@ -1,0 +1,120 @@
+label: 'Biblioteca de mídia'
+description: 'Encontrar e gerenciar mídia.'
+display:
+  default:
+    display_title: Padrão
+    display_options:
+      title: Mídia
+      fields:
+        media_bulk_form:
+          action_title: Ação
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Itens por página'
+            items_per_page_options_all_label: '- Todos -'
+            offset_label: Deslocamento
+      exposed_form:
+        options:
+          submit_button: 'Aplicar filtros'
+          reset_button_label: Redefinir
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Ascendente
+          sort_desc_label: Decrescente
+      empty:
+        area_text_custom:
+          content: 'Nenhuma mídia disponível.'
+      sorts:
+        created:
+          expose:
+            label: 'Mais recente primeiro'
+        name:
+          expose:
+            label: 'Nome (A-Z)'
+        name_1:
+          expose:
+            label: 'Nome (Z-A)'
+      filters:
+        status:
+          expose:
+            label: 'Status de publicação'
+          group_info:
+            label: Publicado
+            group_items:
+              1:
+                title: Publicado
+              2:
+                title: 'Não publicado'
+        name:
+          expose:
+            label: Nome
+        bundle:
+          expose:
+            label: 'Tipo de mídia'
+          group_info:
+            label: 'Tipo de mídia'
+        langcode:
+          expose:
+            label: Idioma
+  page:
+    display_title: Página
+    display_options:
+      fields:
+        media_bulk_form:
+          action_title: Ação
+        name:
+          separator: ', '
+        edit_media:
+          alter:
+            text: 'Editar {{ name }}'
+            alt: 'Editar {{ name }}'
+          text: Editar
+        delete_media:
+          alter:
+            text: 'Apagar {{ name }}'
+            alt: 'Apagar {{ name }}'
+          text: Apagar
+  widget:
+    display_title: Widget
+    display_options:
+      arguments:
+        bundle:
+          exception:
+            title: Tudo
+      filters:
+        name:
+          expose:
+            label: Nome
+      header:
+        display_link_grid:
+          label: Grade
+        display_link_table:
+          label: Tabela
+  widget_table:
+    display_title: 'Widget (tabela)'
+    display_options:
+      fields:
+        thumbnail__target_id:
+          label: Miniatura
+        name:
+          label: Nome
+        uid:
+          label: Autor
+        changed:
+          label: Atualizado
+      arguments:
+        bundle:
+          exception:
+            title: Tudo
+      filters:
+        name:
+          expose:
+            label: Nome
+      header:
+        display_link_grid:
+          label: Grade
+        display_link_table:
+          label: Tabela

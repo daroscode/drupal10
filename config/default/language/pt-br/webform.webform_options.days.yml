@@ -1,0 +1,10 @@
+label: Dias
+category: 'Data e hora'
+options: |
+  Domingo: Domingo
+  Segunda: Segunda
+  Terça: Terça
+  Quarta: Quarta
+  Quinta: Quinta
+  Sexta: Sexta
+  Sábado: Sábado

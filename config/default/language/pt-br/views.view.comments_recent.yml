@@ -1,0 +1,20 @@
+label: 'Comentários recentes'
+description: 'Comentários recentes.'
+display:
+  default:
+    display_title: Padrão
+    display_options:
+      title: 'Comentários recentes'
+      fields:
+        changed:
+          settings:
+            future_format: '@interval'
+            past_format: '@interval atrás'
+      empty:
+        area_text_custom:
+          content: 'Nenhum comentário disponível.'
+  block_1:
+    display_title: Bloco
+    display_options:
+      block_description: 'Comentários recentes'
+      block_category: 'Listas (Views)'

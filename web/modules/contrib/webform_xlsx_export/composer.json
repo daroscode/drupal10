@@ -1,0 +1,12 @@
+{
+    "name": "drupal/webform_xlsx_export",
+    "type": "drupal-module",
+    "description": "Exports Webform submissions in the Office Open XML format.",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.9"
+    },
+    "require-dev": {
+        "vijaycs85/drupal-quality-checker": "^1.3"
+    }
+}

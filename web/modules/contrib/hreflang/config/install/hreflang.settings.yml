@@ -1,0 +1,3 @@
+x_default: TRUE
+x_default_fallback: TRUE
+defer_to_content_translation: FALSE

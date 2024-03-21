@@ -6,8 +6,8 @@
 # https://www.drupal.org/docs/develop/using-composer
 
 # Ignore configuration files that may contain sensitive information
-/web/sites/*/*settings*.php
-/web/sites/*/*services*.yml
+# /web/sites/*/*settings*.php
+# /web/sites/*/*services*.yml
 
 # Ignore paths that may contain user-generated content
 /web/sites/*/files
@@ -27,10 +27,13 @@
 /web/modules/README.txt
 /web/profiles/README.txt
 /web/sites/development.services.yml
-/web/sites/example.settings.local.php
+/web/sites/default/services.yml
+/web/sites/*/settings.local.php
+/web/sites/*/settings.php
 /web/sites/example.sites.php
 /web/sites/README.txt
 /web/themes/README.txt
+/web/themes/*/*/node_modules
 /web/.csslintrc
 /web/.editorconfig
 /web/.eslintignore
@@ -60,3 +63,9 @@
 /drush
 /drupal.phar
 /drupal
+
+# Ignore Code Editor files
+.vscode/
+.history/
+.vscode
+.history

@@ -1,0 +1,10 @@
+maxlength:
+  css:
+    theme:
+      css/maxlength.css: {}
+  js:
+    js/maxlength.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/jquery

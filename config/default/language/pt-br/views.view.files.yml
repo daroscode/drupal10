@@ -1,0 +1,95 @@
+label: Arquivos
+description: 'Encontrar e gerenciar arquivos.'
+display:
+  default:
+    display_title: Padrão
+    display_options:
+      title: Arquivos
+      fields:
+        fid:
+          label: Fid
+        filename:
+          label: Nome
+          separator: ', '
+        filemime:
+          label: 'Tipo MIME'
+        filesize:
+          label: Tamanho
+        status:
+          label: Status
+          settings:
+            format_custom_false: Temporário
+            format_custom_true: Permanente
+        created:
+          label: 'Data de envio'
+        changed:
+          label: 'Data de alteração'
+        count:
+          label: 'Usado em'
+          alter:
+            path: 'admin/content/files/usage/{{ fid }}'
+          format_plural_string: !!binary MSBsb2NhbANAY291bnQgbG9jYWlz
+        operations:
+          label: Operações
+      pager:
+        options:
+          tags:
+            next: 'Avançar ›'
+            previous: '‹ Voltar'
+          expose:
+            items_per_page_label: 'Itens por página'
+            items_per_page_options_all_label: '- Todos -'
+            offset_label: Deslocamento
+      exposed_form:
+        options:
+          submit_button: Filtrar
+          reset_button_label: Redefinir
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Ascendente
+          sort_desc_label: Decrescente
+      empty:
+        area_text_custom:
+          content: 'Nenhum arquivo disponível.'
+      filters:
+        filename:
+          expose:
+            label: 'Nome do arquivo'
+        filemime:
+          expose:
+            label: 'Tipo MIME'
+        status:
+          expose:
+            label: Status
+  page_1:
+    display_title: 'Visão geral de arquivos'
+    display_options:
+      menu:
+        title: Arquivos
+  page_2:
+    display_title: 'Uso de arquivo'
+    display_options:
+      title: 'Uso de arquivo'
+      fields:
+        entity_label:
+          label: Entidade
+        type:
+          label: 'Tipo de entidade'
+        module:
+          label: 'Registrando módulo'
+        count:
+          label: 'Usar contador'
+          format_plural_string: !!binary MQNAY291bnQ=
+      pager:
+        options:
+          tags:
+            next: 'Avançar ›'
+            previous: '‹ Voltar'
+          expose:
+            items_per_page_label: 'Itens por página'
+            items_per_page_options_all_label: '- Todos -'
+            offset_label: Deslocamento
+      arguments:
+        fid:
+          exception:
+            title: Tudo
+          title: 'Informação de uso de arquivo para {{ arguments.fid }}'

@@ -1,0 +1,22 @@
+uuid: a2e754d7-6115-4b63-90e8-a42a084719a1
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupal10_bootstrap_sass
+_core:
+  default_config_hash: qI-mCWVSOg_AloN6XYzbImQdrM6AaIAI5RL--6hdls4
+id: drupal10_bootstrap_sass_powered
+theme: drupal10_bootstrap_sass
+region: footer_fifth
+weight: -7
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

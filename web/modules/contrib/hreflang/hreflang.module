@@ -1,0 +1,131 @@
+<?php
+
+/**
+ * @file
+ * Adds hreflang link elements to the header of each page.
+ */
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_page_attachments().
+ *
+ * @phpstan-ignore-next-line Hook implementations should not duplicate @param
+ * documentation.
+ */
+function hreflang_page_attachments(array &$page): void {
+  // No need to add hreflang tags for 404/403 pages.
+  if (\Drupal::request()->attributes->has('exception')) {
+    return;
+  }
+
+  $config = \Drupal::config('hreflang.settings');
+  $addXDefault = $config->get('x_default');
+  $is_front_page = \Drupal::service('path.matcher')->isFrontPage();
+  if ($config->get('defer_to_content_translation') && $entity = hreflang_content_translation_get_entity()) {
+    if ($addXDefault) {
+      $url = $is_front_page ? Url::fromRoute('<front>') : $entity->toUrl();
+      $page['#attached']['html_head_link'][] = [
+        [
+          'rel' => 'alternate',
+          'hreflang' => 'x-default',
+          'href' => $url
+            ->setOption('language', $entity->getUntranslated()->language())
+            ->setAbsolute()
+            ->toString(),
+        ],
+      ];
+    }
+    return;
+  }
+
+  $language_manager = \Drupal::languageManager();
+  if (!$language_manager->isMultilingual()) {
+    return;
+  }
+  $url = $is_front_page ? Url::fromRoute('<front>') : Url::fromRouteMatch(\Drupal::routeMatch());
+  $links = $language_manager->getLanguageSwitchLinks(LanguageInterface::TYPE_INTERFACE, $url);
+  if (empty($links->links)) {
+    return;
+  }
+
+  // Adding x-default if option checked.
+  $defaultLanguageId = $language_manager->getDefaultLanguage()->getId();
+  if ($config->get('x_default_fallback')) {
+    $fallbackLanguageId = \Drupal::config('language.negotiation')->get('selected_langcode');
+    if (isset($fallbackLanguageId) && $fallbackLanguageId !== 'site_default') {
+      $defaultLanguageId = $fallbackLanguageId;
+    }
+  }
+
+  foreach ($links->links as $langcode => $link) {
+    if (isset($link['url'])) {
+      $link['url']->setOptions($link);
+      $link['url']->setAbsolute();
+      $attributes = [
+        'rel' => 'alternate',
+        'hreflang' => NULL,
+        'href' => $link['url']->toString(),
+      ];
+      if ($addXDefault && $langcode === $defaultLanguageId) {
+        $attributes['hreflang'] = 'x-default';
+        $page['#attached']['html_head_link'][] = [$attributes];
+      }
+      $attributes['hreflang'] = $langcode;
+      $page['#attached']['html_head_link'][] = [$attributes];
+    }
+  }
+  // The hreflang tags include query args, so add the query args cache context.
+  $page['#cache']['contexts'][] = 'url.query_args';
+}
+
+/**
+ * Get source content_translation entity used for hreflang links.
+ *
+ * @see content_translation_page_attachments()
+ *
+ * @return \Drupal\Core\Entity\ContentEntityInterface|null
+ *   Get an entity from route, that will be used as a source for the hreflang
+ *   links by the content_translation module.
+ */
+function hreflang_content_translation_get_entity() {
+  if (!\Drupal::service('module_handler')->moduleExists('content_translation')) {
+    return NULL;
+  }
+
+  $route_match = \Drupal::routeMatch();
+  if ($parameters = $route_match->getRouteObject()->getOption('parameters')) {
+    // Determine if the current route displays a content entity. If it does,
+    // defer to logic in content_translation_page_attachments().
+    foreach ($parameters as $name => $options) {
+      if (!isset($options['type']) || strpos($options['type'], 'entity:') !== 0) {
+        continue;
+      }
+      $entity = $route_match->getParameter($name);
+      if ($entity instanceof ContentEntityInterface && $entity->hasLinkTemplate('canonical')) {
+        return $entity;
+      }
+    }
+  }
+
+  return NULL;
+}
+
+/**
+ * Implements hook_help().
+ *
+ * @phpstan-ignore-next-line Hook implementations should not duplicate @return
+ * documentation.
+ */
+function hreflang_help(?string $route_name): array {
+  if ($route_name === 'hreflang.admin_settings' || $route_name === 'help.page.hreflang') {
+    return [
+      '#type' => 'html_tag',
+      '#tag' => 'p',
+      '#value' => t('Hreflang module automatically adds an hreflang tag to the page for each enabled language.'),
+    ];
+  }
+  return [];
+}

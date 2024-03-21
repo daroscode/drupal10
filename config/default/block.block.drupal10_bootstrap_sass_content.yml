@@ -1,0 +1,22 @@
+uuid: 22994c7e-6d97-4325-adef-82f70725d789
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupal10_bootstrap_sass
+_core:
+  default_config_hash: SYo3TlLmiP_1b3VqI0Z4ANVgl7eFntYzwwSca1QVh_U
+id: drupal10_bootstrap_sass_content
+theme: drupal10_bootstrap_sass
+region: content
+weight: -3
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

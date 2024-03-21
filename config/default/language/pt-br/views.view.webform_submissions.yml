@@ -1,0 +1,180 @@
+label: 'Submissões do webform'
+description: 'Views padrão de submissões de webform.'
+display:
+  default:
+    display_title: Principal
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Aplicar
+          reset_button_label: Redefinir
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Ascendente
+          sort_desc_label: Decrescente
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Primeiro'
+            last: 'Último »'
+          expose:
+            items_per_page_label: 'Itens por página'
+            items_per_page_options_all_label: '- Todos -'
+            offset_label: Deslocamento
+      fields:
+        sid:
+          label: '#'
+          separator: ', '
+        in_draft:
+          label: Rascunho
+          separator: ', '
+        created:
+          label: Criado
+          separator: ', '
+        remote_addr:
+          label: 'Endereço IP'
+          separator: ', '
+        view_webform_submission:
+          label: Operações
+          text: ver
+      header:
+        result:
+          content: 'Exibindo @start - @end de @total'
+      empty:
+        area_text_custom:
+          content: 'Nenhuma submissão disponível.'
+      arguments:
+        in_draft:
+          exception:
+            title: Tudo
+      title: 'Submissões do webform'
+  embed_default:
+    display_title: 'Embutir: Padrão'
+    display_options:
+      display_description: 'Exibir submissões.'
+  embed_administer:
+    display_title: 'Embutir: Administrar'
+    display_options:
+      display_description: 'Administrar submissões.'
+      fields:
+        webform_submission_bulk_form:
+          label: 'Formulário de operações em massa de submissões de webform'
+          action_title: Ação
+        sid:
+          label: '#'
+          separator: ', '
+        in_draft:
+          label: Rascunho
+          separator: ', '
+        sticky:
+          label: Destacado
+          separator: ', '
+        locked:
+          label: Bloqueado
+          separator: ', '
+        created:
+          label: Criado
+          separator: ', '
+        completed:
+          label: Concluído
+          separator: ', '
+        remote_addr:
+          label: 'Endereço IP'
+          separator: ', '
+        operations:
+          label: Operações
+      filters:
+        in_draft:
+          expose:
+            label: 'É rascunho'
+        sticky:
+          expose:
+            label: Destacado
+        locked:
+          expose:
+            label: Bloqueado
+  embed_manage:
+    display_title: 'Embutir: Gerenciar'
+    display_options:
+      display_description: 'Gerenciar submissões.'
+      fields:
+        webform_submission_bulk_form:
+          label: 'Formulário de operações em massa de submissões de webform'
+          action_title: Ação
+        sid:
+          label: '#'
+          separator: ', '
+        in_draft:
+          label: Rascunho
+          separator: ', '
+        sticky:
+          label: Destacado
+          separator: ', '
+        locked:
+          label: Bloqueado
+          separator: ', '
+        created:
+          label: Criado
+          separator: ', '
+        completed:
+          label: Concluído
+          separator: ', '
+        remote_addr:
+          label: 'Endereço IP'
+          separator: ', '
+        view_webform_submission:
+          label: Operações
+          text: ver
+        edit_webform_submission:
+          label: Operações
+          text: editar
+      filters:
+        in_draft:
+          expose:
+            label: 'É rascunho'
+        sticky:
+          expose:
+            label: Destacado
+        locked:
+          expose:
+            label: Bloqueado
+  embed_review:
+    display_title: 'Embutir: Revisão'
+    display_options:
+      display_description: 'Rever submissões.'
+      fields:
+        sid:
+          label: '#'
+          separator: ', '
+        in_draft:
+          label: Rascunho
+          separator: ', '
+        sticky:
+          label: Destacado
+          separator: ', '
+        locked:
+          label: Bloqueado
+          separator: ', '
+        created:
+          label: Criado
+          separator: ', '
+        completed:
+          label: Concluído
+          separator: ', '
+        remote_addr:
+          label: 'Endereço IP'
+          separator: ', '
+        view_webform_submission:
+          label: Operações
+          text: ver
+      filters:
+        in_draft:
+          expose:
+            label: 'É rascunho'
+        sticky:
+          expose:
+            label: Destacado
+        locked:
+          expose:
+            label: Bloqueado

@@ -1,0 +1,45 @@
+label: 'Blocos de conteúdo'
+display:
+  default:
+    display_title: Padrão
+    display_options:
+      title: 'Blocos de conteúdo'
+      fields:
+        info:
+          label: 'Descrição do bloco'
+          separator: ', '
+        type:
+          label: 'Tipo de bloco'
+          separator: ', '
+        changed:
+          label: Atualizado
+        operations:
+          label: Operações
+      pager:
+        options:
+          tags:
+            next: 'Avançar ›'
+            previous: '‹ Voltar'
+          expose:
+            items_per_page_label: 'Itens por página'
+            items_per_page_options_all_label: '- Todos -'
+            offset_label: Deslocamento
+      exposed_form:
+        options:
+          submit_button: Aplicar
+          reset_button_label: Redefinir
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Ascendente
+          sort_desc_label: Decrescente
+      filters:
+        info:
+          expose:
+            label: 'Descrição do bloco'
+        type:
+          expose:
+            label: 'Tipo de bloco'
+  page_1:
+    display_title: Página
+    display_options:
+      menu:
+        title: Blocos

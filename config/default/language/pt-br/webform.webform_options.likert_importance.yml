@@ -1,0 +1,7 @@
+label: 'Likert: Importância'
+options: |
+  1: Nem um pouco importante
+  2: Um pouco importante
+  3: Neutro
+  4: Importante
+  5: Muito Importante

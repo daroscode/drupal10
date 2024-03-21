@@ -1,0 +1,241 @@
+<?php
+
+/**
+ * @file
+ * Limits # of characters in textfields/areas and counts remaining characters.
+ */
+
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Field\WidgetInterface;
+use Drupal\maxlength\MaxLengthCallbacks;
+
+/**
+ * Implements hook_help().
+ */
+function maxlength_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.maxlength':
+      $output = '<h2>' . t('About') . '</h2>';
+      $output = '<p>' . t('To configure a character limit, navigate to the <strong>Manage form display</strong> settings page for the field you are setting a limit on. For example, setting a character limit on the Body field of the Article content type would be found at <em>Structure > Content Types > Article > Manage form display</em>.') . '</p>';
+      $output .= '<p>' . t('For more information, see the <a href="@maxlength-documentation" target="_blank">online documentation for the MaxLength module</a>.', ['@maxlength-documentation' => 'https://www.drupal.org/docs/contributed-modules/maxlength']) . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function maxlength_element_info_alter(&$cache) {
+  // Add prerender functions to textareas and text fields.
+  $cache['textfield']['#pre_render'][] = [
+    MaxLengthCallbacks::class,
+    'maxlengthPreRender',
+  ];
+  $cache['textfield']['#process'][] = [
+    MaxLengthCallbacks::class,
+    'processElement',
+  ];
+  $cache['textarea']['#pre_render'][] = [
+    MaxLengthCallbacks::class,
+    'maxlengthPreRender',
+  ];
+  $cache['textarea']['#process'][] = [
+    MaxLengthCallbacks::class,
+    'processElement',
+  ];
+  $cache['text_format']['#pre_render'][] = [
+    MaxLengthCallbacks::class,
+    'maxlengthPreRender',
+  ];
+  $cache['text_format']['#process'][] = [
+    MaxLengthCallbacks::class,
+    'processElement',
+  ];
+}
+
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ */
+function maxlength_field_widget_third_party_settings_form(WidgetInterface $plugin, FieldDefinitionInterface $field_definition, $form_mode, $form, FormStateInterface $form_state) {
+  $plugin_id = $plugin->getPluginId();
+  // Depending on the widget, we may have different settings.
+  $widget_settings = \Drupal::service('maxlength.widget_settings');
+  $allowed_settings = $widget_settings->getAllowedSettings($plugin_id);
+
+  if (!empty($allowed_settings)) {
+    $element = [
+      '#type' => 'details',
+      '#title' => t('MaxLength Settings'),
+      '#open' => FALSE,
+    ];
+
+    if (!empty($allowed_settings['summary_maxlength_setting'])) {
+      $element['maxlength_js_summary'] = [
+        '#type' => 'number',
+        '#title' => t('Summary maximum length'),
+        '#description' => t('The maximum number of characters in the field.'),
+        '#default_value' => $plugin->getThirdPartySetting('maxlength', 'maxlength_js_summary'),
+        '#element_validate' => ['maxlength_number_element_validate'],
+      ];
+      $element['maxlength_js_label_summary'] = [
+        '#type' => 'textarea',
+        '#rows' => 2,
+        '#title' => t('Summary count down message'),
+        '#default_value' => $plugin->getThirdPartySetting('maxlength', 'maxlength_js_label_summary', t('Content limited to @limit characters, remaining: <strong>@remaining</strong>')),
+        '#description' => t('The dynamic message under the input field, where "@limit", "@remaining" and "@count" are replaced by the appropriate numbers.'),
+      ];
+    }
+    if (!empty($allowed_settings['maxlength_setting'])) {
+      $element['maxlength_js'] = [
+        '#type' => 'number',
+        '#title' => t('Maximum length'),
+        '#description' => t('The maximum number of characters in the field.'),
+        '#default_value' => $plugin->getThirdPartySetting('maxlength', 'maxlength_js'),
+        '#element_validate' => ['maxlength_number_element_validate'],
+      ];
+      $element['maxlength_js_label'] = [
+        '#type' => 'textarea',
+        '#rows' => 2,
+        '#title' => t('Count down message'),
+        '#default_value' => $plugin->getThirdPartySetting('maxlength', 'maxlength_js_label', t('Content limited to @limit characters, remaining: <strong>@remaining</strong>')),
+        '#description' => t('The dynamic message under the input, where "@limit", "@remaining" and "@count" are replaced by the appropriate numbers.'),
+      ];
+    }
+    if (!empty($allowed_settings['truncate_setting'])) {
+      $element['maxlength_js_enforce'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Hard limit'),
+        '#description' => t('If checked, a user is prevented from typing past the character limit.<br/>
+          If unchecked, a user sees a negative character count when typing past the limit.'),
+        '#default_value' => $plugin->getThirdPartySetting('maxlength', 'maxlength_js_enforce'),
+      ];
+    }
+
+    return $element;
+  }
+}
+
+/**
+ * Form element validation handler to ensure the maxlength numbers are positive.
+ */
+function maxlength_number_element_validate(array &$element, FormStateInterface $form_state) {
+  if ($element['#value'] != '' && (int) $element['#value'] < 1) {
+    $form_state->setError($element, t('The maximum length has to be a positive number.'));
+  }
+}
+
+/**
+ * Implements hook_field_widget_settings_summary_alter().
+ */
+function maxlength_field_widget_settings_summary_alter(&$summary, $context) {
+  $plugin_id = $context['widget']->getPluginId();
+  $widget_settings = \Drupal::service('maxlength.widget_settings');
+  $allowed_settings = $widget_settings->getAllowedSettings($plugin_id);
+  if (!empty($allowed_settings)) {
+    if (!empty($allowed_settings['maxlength_setting']) && $context['widget']->getThirdPartySetting('maxlength', 'maxlength_js')) {
+      $summary[] = t('Maximum length: @count', ['@count' => $context['widget']->getThirdPartySetting('maxlength', 'maxlength_js')]);
+    }
+    if (!empty($allowed_settings['summary_maxlength_setting']) && $context['widget']->getThirdPartySetting('maxlength', 'maxlength_js_summary')) {
+      $summary[] = t('Maximum summary length: @count', ['@count' => $context['widget']->getThirdPartySetting('maxlength', 'maxlength_js_summary')]);
+    }
+    if (!empty($allowed_settings['truncate_setting'])) {
+      if ($context['widget']->getThirdPartySetting('maxlength', 'maxlength_js_enforce')) {
+        $summary[] = t('Maximum length - Hard limit');
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_single_element_form_alter().
+ */
+function maxlength_field_widget_single_element_form_alter(&$element, FormStateInterface $form_state, $context) {
+  $thirdPartySettings = $context['widget']->getThirdPartySettings();
+  if (!empty($thirdPartySettings['maxlength']['maxlength_js']) || !empty($thirdPartySettings['maxlength']['maxlength_js_summary'])) {
+    $widget_definition = $context['widget']->getPluginDefinition();
+    if ($widget_definition && !empty($widget_definition['field_types']) && in_array('link', $widget_definition['field_types'])) {
+      // Add maxlength functionality to Link field "title" property.
+      _maxlength_field_widget_form_alter_link_field($element, $form_state, $context);
+    }
+    else {
+      // Assume text fields.
+      $element['#maxlength_js'] = TRUE;
+      $element['value']['#maxlength_js'] = TRUE;
+
+      if (isset($thirdPartySettings['maxlength']['maxlength_js_summary']) && $thirdPartySettings['maxlength']['maxlength_js_summary'] > 0) {
+        $maxlength_js = $thirdPartySettings['maxlength']['maxlength_js_summary'];
+        $element['summary']['#attributes']['data-maxlength'] = $maxlength_js;
+
+        $maxlength_js_label = !empty($thirdPartySettings['maxlength']['maxlength_js_label_summary']) ? $thirdPartySettings['maxlength']['maxlength_js_label_summary'] : t('Content limited to @limit characters, remaining: <strong>@remaining</strong>');
+        $element['summary']['#attributes']['maxlength_js_label'][] = $maxlength_js_label;
+
+        if (isset($thirdPartySettings['maxlength']['maxlength_js_enforce']) && $thirdPartySettings['maxlength']['maxlength_js_enforce']) {
+          $element['summary']['#attributes']['#maxlength_js_enforce'] = TRUE;
+        }
+      }
+
+      if (isset($thirdPartySettings['maxlength']['maxlength_js']) && $thirdPartySettings['maxlength']['maxlength_js'] > 0) {
+        $maxlength_js = $thirdPartySettings['maxlength']['maxlength_js'];
+        $element['value']['#attributes']['data-maxlength'] = $maxlength_js;
+        $element['#attributes']['data-maxlength'] = $maxlength_js;
+
+        $maxlength_js_label = !empty($thirdPartySettings['maxlength']['maxlength_js_label']) ? $thirdPartySettings['maxlength']['maxlength_js_label'] : t('Content limited to @limit characters, remaining: <strong>@remaining</strong>');
+        $element['#attributes']['maxlength_js_label'][] = $maxlength_js_label;
+        $element['value']['#attributes']['maxlength_js_label'][] = $maxlength_js_label;
+      }
+
+      if (isset($thirdPartySettings['maxlength']['maxlength_js_enforce']) && $thirdPartySettings['maxlength']['maxlength_js_enforce']) {
+        $element['value']['#attributes']['#maxlength_js_enforce'] = TRUE;
+        $element['#attributes']['#maxlength_js_enforce'] = TRUE;
+      }
+    }
+  }
+}
+
+/**
+ * Widget form alter for all Link fields.
+ *
+ * @param array $element
+ *   The widget element.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ * @param array $context
+ *   See hook_field_widget_form_alter().
+ */
+function _maxlength_field_widget_form_alter_link_field(array &$element, FormStateInterface $form_state, array $context): void {
+  if (!isset($element['title'])) {
+    return;
+  }
+
+  $thirdPartySettings = $context['widget']->getThirdPartySettings();
+  $element['#maxlength_js'] = TRUE;
+
+  if (isset($thirdPartySettings['maxlength']['maxlength_js']) && $thirdPartySettings['maxlength']['maxlength_js'] > 0) {
+    $maxlength_js_label = !empty($thirdPartySettings['maxlength']['maxlength_js_label']) ? $thirdPartySettings['maxlength']['maxlength_js_label'] : t('Content limited to @limit characters, remaining: <strong>@remaining</strong>');
+    $maxlength_js = $thirdPartySettings['maxlength']['maxlength_js'];
+
+    // In the Link module the link text field has a set maxlength of 255
+    // characters.
+    $maxlength_js = ($maxlength_js <= 255) ? $maxlength_js : 255;
+
+    // Set title maxlength attributes.
+    $element['title']['#maxlength_js'] = TRUE;
+    $element['title']['#attributes']['class'][] = 'maxlength';
+    $element['title']['#attached']['library'][] = 'maxlength/maxlength';
+    $element['title']['#attributes']['data-maxlength'] = $maxlength_js;
+    $element['title']['#attributes']['maxlength_js_label'][] = $maxlength_js_label;
+    if (isset($element['title']['value'])) {
+      $element['title']['value']['#attributes']['data-maxlength'] = $maxlength_js;
+      $element['title']['value']['#attributes']['maxlength_js_label'][] = $maxlength_js_label;
+    }
+
+    if (isset($thirdPartySettings['maxlength']['maxlength_js_enforce']) && $thirdPartySettings['maxlength']['maxlength_js_enforce']) {
+      $element['title']['#attributes']['#maxlength_js_enforce'] = TRUE;
+      if (isset($element['title']['value'])) {
+        $element['title']['value']['#attributes']['#maxlength_js_enforce'] = TRUE;
+      }
+    }
+  }
+}

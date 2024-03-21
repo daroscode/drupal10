@@ -1,0 +1,42 @@
+title: Contato
+description: 'Webform básico de contato por e-mail.'
+elements: |
+  name:
+    '#title': 'Seu Nome'
+    '#type': textfield
+    '#required': true
+    '#default_value': '[current-user:display-name]'
+  email:
+    '#title': 'Seu email'
+    '#type': email
+    '#required': true
+    '#default_value': '[current-user:mail]'
+  subject:
+    '#title': Assunto
+    '#type': textfield
+    '#required': true
+    '#test': 'Testando formulário de contato de [site:name]'
+  message:
+    '#title': Mensagem
+    '#type': textarea
+    '#required': true
+    '#test': 'Por favor, ignore este email.'
+  actions:
+    '#type': webform_actions
+    '#title': 'Botões de envio'
+    '#submit__label': 'Enviar mensagem'
+settings:
+  confirmation_message: 'Sua mensagem foi enviada.'
+handlers:
+  email_confirmation:
+    label: 'E-mail de confirmação'
+    settings:
+      from_name: _default
+      subject: '[webform_submission:values:subject:raw]'
+      body: '[webform_submission:values:message:value]'
+  email_notification:
+    label: 'Notificação de email'
+    settings:
+      from_name: '[webform_submission:values:name:raw]'
+      subject: '[webform_submission:values:subject:raw]'
+      body: '[webform_submission:values:message:value]'

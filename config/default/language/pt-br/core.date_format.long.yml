@@ -1,0 +1,2 @@
+label: 'Data longa padrão'
+pattern: 'l, j \d\e F \d\e Y - H:i'

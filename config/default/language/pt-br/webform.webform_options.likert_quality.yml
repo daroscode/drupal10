@@ -1,0 +1,7 @@
+label: 'Likert: Qualidade'
+options: |
+  1: Ruim
+  2: Razoável
+  3: Bom
+  4: Muito bom
+  5: Excelente

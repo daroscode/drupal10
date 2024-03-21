@@ -1,0 +1,6 @@
+label: 'Tipo de telefone'
+category: Demográfico
+options: |
+  Residencial: Residencial
+  Trabalho: Trabalho
+  Celular: Celular

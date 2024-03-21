@@ -1,0 +1,21 @@
+uuid: 27c665c6-b4b9-45d8-9b3f-84e1e65219f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_yoast_seo
+    - node.type.webform
+  module:
+    - yoast_seo
+id: node.webform.field_yoast_seo
+field_name: field_yoast_seo
+entity_type: node
+bundle: webform
+label: 'Real-time SEO'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: yoast_seo

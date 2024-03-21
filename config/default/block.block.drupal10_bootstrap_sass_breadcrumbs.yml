@@ -1,0 +1,22 @@
+uuid: 750b35fe-3ef3-4978-b36b-2e7693b2f475
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupal10_bootstrap_sass
+_core:
+  default_config_hash: pP5PCgc-Ka3NEBbAL76yOFvVvC1dO8wOZlvJzoTHLdE
+id: drupal10_bootstrap_sass_breadcrumbs
+theme: drupal10_bootstrap_sass
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

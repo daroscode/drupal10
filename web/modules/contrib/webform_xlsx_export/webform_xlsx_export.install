@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Webform XLSX Export module.
+ */
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
+/**
+ * Implements hook_requirements().
+ */
+function webform_xlsx_export_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'runtime') {
+    $requirements['webform_xlsx_export_phpspreadsheet'] = [
+      'title' => 'Webform XLSX export - PhpSpreadsheet',
+    ];
+
+    try {
+      new Spreadsheet();
+      $requirements['webform_xlsx_export_phpspreadsheet']['severity'] = REQUIREMENT_OK;
+      $requirements['webform_xlsx_export_phpspreadsheet']['description'] = t('PhpSpreadsheet is installed.');
+    }
+    catch (Exception $e) {
+      $requirements['webform_xlsx_export_phpspreadsheet']['severity'] = REQUIREMENT_ERROR;
+      $requirements['webform_xlsx_export_phpspreadsheet']['description'] = t('You need to install PhpSpreadsheet if you want to use XLSX exports in Webform.');
+    }
+  }
+
+  return $requirements;
+}

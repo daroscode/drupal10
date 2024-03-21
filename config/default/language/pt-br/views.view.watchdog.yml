@@ -1,0 +1,57 @@
+label: Watchdog
+description: 'Mensagens recentes do registro'
+display:
+  default:
+    display_title: Padrão
+    display_options:
+      title: 'Mensagens recentes do registro'
+      fields:
+        nothing:
+          admin_label: Ícone
+        wid:
+          label: WID
+        severity:
+          label: Severidade
+        type:
+          label: Tipo
+        timestamp:
+          label: Data
+        message:
+          label: Mensagem
+          alter:
+            path: 'admin/reports/dblog/event/{{ wid }}'
+            alt: '{{ message }}'
+        name:
+          label: Usuário
+          separator: ', '
+        link:
+          label: Operações
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Itens por página'
+            items_per_page_options_all_label: '- Todos -'
+            offset_label: Deslocamento
+      exposed_form:
+        options:
+          submit_button: Filtrar
+          reset_button_label: Redefinir
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Ascendente
+          sort_desc_label: Decrescente
+      empty:
+        area:
+          admin_label: 'Nenhuma mensagem de registro disponível.'
+          content: 'Nenhuma mensagem de registro disponível.'
+      filters:
+        type:
+          expose:
+            label: Tipo
+        severity:
+          expose:
+            label: Severidade
+  page:
+    display_title: Página

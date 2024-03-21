@@ -1,0 +1,13 @@
+hreflang.settings:
+  type: config_object
+  label: 'Hreflang settings'
+  mapping:
+    x_default:
+      type: boolean
+      label: 'Add x-default hreflang tag'
+    x_default_fallback:
+      type: boolean
+      label: 'Point x-default hreflang tag at the fallback language'
+    defer_to_content_translation:
+      type: boolean
+      label: 'Defer to Content Translation hreflang tags on content entity pages'

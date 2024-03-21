@@ -1,0 +1,25 @@
+uuid: ef80c351-aa28-45c0-a658-493e61f079f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupal10_bootstrap_sass
+_core:
+  default_config_hash: RFcQVMfrK7cfHAPREkpxNEdOi_mai42rdY2lFLxe3Ug
+id: drupal10_bootstrap_sass_site_branding
+theme: drupal10_bootstrap_sass
+region: header
+weight: -7
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }
