@@ -3,9 +3,10 @@
 Projeto para estudos e testes Drupal 10.
 
 - Versão do Lando: ```3.20.8```
-- Versão PHP: ```8.2.16```
-- Versão do Node: ```VERIFICAR```
-- Versão do Gulp: ```VERIFICAR```
+- Versão PHP: ```8.2.16 (interno no Lando)```
+- Versão Composer: ```2.7.2 (interno no Lando)```
+- Versão do Node: ```16 (interno no Lando)```
+- Versão do Gulp: ```2.3.0 (interno no Lando)```
 
 ## Acesso Drupal:
 - Usuário: ```admin```
