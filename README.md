@@ -45,7 +45,7 @@ Quando for criado algo que seja gravado no banco de dados (ao invés de configur
 
 ## Tema:
 - Instalar NPM e Gulp (caso tenha erros durante lando start): ```lando npm-cli install && lando gulp-cli install```
-- Entre na pasta do tema: ```cd web/themes/custom/xtreme_bootstrap_sass/```
+- Entre na pasta do tema: ```cd web/themes/custom/drupal10_bootstrap_sass/```
 - Instale o NPM: ```lando npm install```
 - Instale o Gulp: ```lando npm install --global gulp-cli```
 - Instale Material Design Bootstrap: ```lando npm install mdbootstrap```
