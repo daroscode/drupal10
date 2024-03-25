@@ -18,7 +18,7 @@ Projeto para estudos e testes Drupal 10.
 - Criar o arquivo services: ```cp web/sites/default/example.services.yml web/sites/default/services.yml```
 - Iniciar ambiente: ```lando start```
 - Instalar Drupal: ```lando composer install```
-- Subir banco: ```lando db-import db/database.sql.gz```
+- Subir banco: ```lando db-import db/database.tar.xz```
 - Importar configurações: ```lando drush cim -y```
 - Limpar cache: ```lando drush cr```
 - Acessar projeto: ```lando drush uli```
