@@ -1,0 +1,17 @@
+diff --git a/core/lib/Drupal/Core/Entity/ContentEntityBase.php b/core/lib/Drupal/Core/Entity/ContentEntityBase.php
+index 9802c3df8d..a25475d8e6 100644
+--- a/core/lib/Drupal/Core/Entity/ContentEntityBase.php
++++ b/core/lib/Drupal/Core/Entity/ContentEntityBase.php
+@@ -865,6 +865,12 @@ public function getTranslation($langcode) {
+       $translation = $this->initializeTranslation($langcode);
+       $this->translations[$langcode]['entity'] = $translation;
+     }
++    // If we don't have a translation object for the switched language used by
++    // the language field in the entity, we can use the default active translation.
++    elseif (isset($this->translations[$this->activeLangcode]) && $this->activeLangcode !== $langcode) {
++      $translation = $this->initializeTranslation($this->activeLangcode);
++      $this->translations[$this->activeLangcode]['entity'] = $translation;
++    }
+ 
+     if (empty($translation)) {
+       throw new \InvalidArgumentException("Invalid translation language ($langcode) specified.");

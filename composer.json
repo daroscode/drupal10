@@ -99,6 +99,10 @@
             "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
+        },"patches": {
+            "drupal/core": {
+                "Prevents Language not found issue": "patches/3386915-18.patch"
+            }
         },
         "drupal-core-project-message": {
             "include-keys": [
